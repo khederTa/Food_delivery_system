@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Register</title>
+</head>
+
+<body>
+    <script>
+        var admin = "<%= admin %>";
+        var loggedin = "<%= loggedin %>"
+    </script>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                </a>
+            </div>
+
+            <div class="menu text-right">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li id="admin">
+                        <a href="/AdminDashboard">Admin Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/foods">Foods</a>
+                    </li>
+                    <li>
+                        <a href="/contactus">Contact Us</a>
+                    </li>
+
+                    <li id="login">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li id="register">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li id="logout">
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart
+                            (<span class="total-count"></span>)</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+    <div class="wrapper">
+        <div class="form-left">
+            <h2 class="text-uppercase">information</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.
+            </p>
+            <p class="text">
+                <span>Sub Head:</span>
+                Vitae auctor eu augudsf ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo
+                vel.
+            </p>
+            
+        </div>
+        <form class="form-right" action="/contactus" method="post">
+            <h2 class="text-uppercase">Contact Us</h2>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label>Name</label>
+                    <input type="text" name="name" id="name" class="input-field" required>
+                </div>
+                
+            </div>
+            <div class="mb-3">
+                <label>Your Email</label>
+                <input type="email" class="input-field" name="email" required>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label>Mobile Phone</label>
+                    <input type="text" name="phone" id="phone" class="input-field">
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label>Title</label>
+                    <input type="text" name="title" id="title" class="input-field">
+                </div>'
+                <div class="col-sm-6 mb-3">
+                    <label>Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" class="input-field" required></textarea>
+                </div>
+            </div>
+           
+            <div class="form-field">
+                <input type="submit" value="send" class="register" name="send">
+            </div>
+        </form>
+    </div>
+    
+    
+    <script>
+        if (loggedin == 'yes') {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('logout').style.display = 'inline';
+        }
+        else {
+            document.getElementById('login').style.display = 'inline';
+            document.getElementById('register').style.display = 'inline';
+            document.getElementById('logout').style.display = 'none';
+        }
+        if (admin == 'yes') {
+            document.getElementById('admin').style.display = 'inline'
+        }
+        else {
+            document.getElementById('admin').style.display = 'none'
+        }
+
+    </script>
+</body>
+
+</html>

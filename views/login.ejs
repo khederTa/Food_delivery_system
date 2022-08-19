@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+
+<body>
+   
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                </a>
+            </div>
+
+            <div class="menu text-right">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li id="admin">
+                        <a href="/AdminDashboard">Admin Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/foods">Foods</a>
+                    </li>
+                    <li>
+                        <a href="/contactus">Contact Us</a>
+                    </li>
+                    <li id="login">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li id="register">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li id="logout">
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart
+                            (<span class="total-count"></span>)</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+    <div class="wrapper">
+
+        <form class="form-right" action="/login" method="post">
+            <h2 class="text-uppercase">Login</h2>
+            <div class="mb-3">
+                <label>Your Email</label>
+                <input type="email" class="input-field" name="email" required>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label>Password</label>
+                    <input type="password" name="pwd" id="pwd" class="input-field">
+                </div>
+
+                <div class="form-field">
+                    <input type="submit" value="Login" class="register" name="register">
+                    <input type="button" id="myButton" class="account" value="Create an Account"
+                        style="background: #ff6b81; border-bottom-right-radius: 10%; border-top-left-radius: 10% ; border: 0px; padding: 15px; color: #fff;">
+                </div>
+                <div class="form-field">
+
+                </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("myButton").onclick = function () {
+            location.href = "/register";
+        };
+    </script>
+    <script>
+        if ("<%= loggedin %>" == 'yes') {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('logout').style.display = 'inline';
+        }
+        else {
+            document.getElementById('login').style.display = 'inline';
+            document.getElementById('register').style.display = 'inline';
+            document.getElementById('logout').style.display = 'none';
+        }
+        if ('<%= admin %>' == 'yes') {
+            document.getElementById('admin').style.display = 'inline'
+        }
+        else {
+            document.getElementById('admin').style.display = 'none'
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <script>
+        var admin = "<%= admin %>";
+        var loggedin = "<%= loggedin %>"
+    </script>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                </a>
+            </div>
+
+            <div class="menu text-right">
+                <ul>
+
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li id="admin">
+                        <a href="/AdminDashboard">Admin Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/foods">Foods</a>
+                    </li>
+                    <li>
+                        <a href="/contactus">Contact Us</a>
+                    </li>
+
+                    <li id="login">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li id="register">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li id="logout">
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart
+                            (<span class="total-count"></span>)</button>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+    <div class="wrapper">
+        <div class="form-left">
+            <h2 class="text-uppercase">Admin Dashboard</h2>
+            <p>
+                Add new item to our restaurant
+            </p>
+
+
+        </div>
+        <form class="form-right" action="/food/upload" method="POST" enctype="multipart/form-data">
+            <h2 class="text-uppercase">Add New Mail To The Restaurant</h2>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label>Food Name </label>
+                    <input type="text" name="food_name" id="food_name" class="input-field" required>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label>Food Price</label>
+                    <input type="number" name="food_price" id="food_price" min="0.0" class="input-field" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Food Image</label>
+                <input type="file" name="file" id="file" class="input-field" onchange="" required>
+            </div>
+
+
+            <div class="form-field">
+                <input type="submit" value="Add Item" class="register" name="register">
+            </div>
+        </form>
+    </div>
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Food Menu</h2>
+
+
+            <% if(result){ %>
+                <% result.forEach(function(res) { %>
+                    <div class="food-menu-box">
+                        <div class="food-menu-img">
+                            <script>
+                                var src = "/upload/image/" + "<%= res.food_image %>"
+                            </script>
+                            <img src="food/image/<%= res.food_image_name %>" alt="Chicke Hawain Momo"
+                                class="img-responsive img-curve" width="400px " height="111px">
+                        </div>
+
+                        <div class="food-menu-desc">
+                            <h4>
+                                <%= res.food_name %>
+                            </h4>
+
+
+                            <br>
+                            <p class="card-text">Price: $<%= res.food_price %>
+                            </p>
+                            <br>
+                            <a href="#" data-name="<%= res.food_name %>" data-price="<%= res.food_price %>"
+                                class="add-to-cart btn btn-primary">Add to cart</a>
+
+
+                            <form action="/food/delete/<%= res.food_image_id %>" method="post"
+                                enctype="multipart/form-data">
+                                <br>
+                                <button class="btn btn-primary">Remove Item</button>
+                            </form>
+
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } %>
+
+
+
+                            <div class="clearfix"></div>
+
+
+
+        </div>
+
+
+        <p class="text-center">
+            <a href="#">See All Foods</a>
+        </p>
+    </section>
+    <!-- ********************************************** -->
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Contact Us List</h2>
+
+
+            <% if(ContactUs){ %>
+                <% ContactUs.forEach(function(res) { %>
+                    <div class="food-menu-box">
+                        
+
+                        <div class="food-menu-desc">
+                            <h4>
+                                <%= res.name %>
+                            </h4>
+
+
+                            <br>
+                            <p class="card-text">phone: <%= res.phone %>
+                            </p>
+                            <p class="card-text">email: <%= res.email %>
+                            </p>
+                            <p class="card-text">title: <%= res.title %>
+                            </p>
+                            <p class="card-text">message: <%= res.message %>
+                            </p>
+                            <br>
+                            
+                            
+
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } %>
+
+
+
+                            <div class="clearfix"></div>
+
+
+
+        </div>
+    </section>
+
+    <!-- ********************************************** -->
+    <!-- <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+
+                    </table>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Order now</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <script>
+        if (loggedin == 'yes') {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('logout').style.display = 'inline';
+        }
+        else {
+            document.getElementById('login').style.display = 'inline';
+            document.getElementById('register').style.display = 'inline';
+            document.getElementById('logout').style.display = 'none';
+        }
+        if (admin == 'yes') {
+            document.getElementById('admin').style.display = 'inline'
+        }
+        else {
+            document.getElementById('admin').style.display = 'none'
+        }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>

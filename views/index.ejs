@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+<body>
+
+
+
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                </a>
+            </div>
+
+
+            <div class="menu text-right">
+                <ul>
+
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li id="admin">
+                        <a href="/AdminDashboard">Admin Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/foods">Foods</a>
+                    </li>
+                    <li>
+                        <a href="/contactus">Contact Us</a>
+                    </li>
+
+                    <li id="login">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li id="register">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li id="logout">
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart
+                            (<span class="total-count"></span>)</button>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+
+    <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+
+            <form action="food-search.html" method="POST">
+                <input type="search" name="search" placeholder="Search for Food.." required>
+                <input type="submit" name="submit" value="Search" class="btn btn-primary">
+            </form>
+
+        </div>
+    </section>
+    <!-- fOOD sEARCH Section Ends Here -->
+
+    <!-- CAtegories Section Starts Here -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="text-center">Explore Foods</h2>
+
+            <a href="category-foods.html">
+                <div class="box-3 float-container">
+                    <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+
+                    <h3 class="float-text text-white">Pizza</h3>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="box-3 float-container">
+                    <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+
+                    <h3 class="float-text text-white">Burger</h3>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="box-3 float-container">
+                    <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
+
+                    <h3 class="float-text text-white">Momo</h3>
+                </div>
+            </a>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Categories Section Ends Here -->
+
+    <!-- fOOD MEnu Section Starts Here -->
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Food Menu</h2>
+
+
+            <% if(result){ %>
+                <% result.forEach(function(res) { %>
+                    <div class="food-menu-box">
+                        <div class="food-menu-img">
+                            <script>
+                                var src = "/upload/image/" + "<%= res.food_image %>"
+                            </script>
+                            <img src="food/image/<%= res.food_image_name %>" alt="Chicke Hawain Momo"
+                                class="img-responsive img-curve" width="400px " height="111px">
+                        </div>
+
+                        <div class="food-menu-desc">
+                            <h4>
+                                <%= res.food_name %>
+                            </h4>
+
+
+                            <br>
+                            <p class="card-text">Price: $<%= res.food_price %>
+                            </p>
+                            <br>
+                            <a href="#" data-name="<%= res.food_name %>" data-price="<%= res.food_price %>"
+                                class="add-to-cart btn btn-primary">Add to cart</a>
+
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } %>
+
+
+
+                            <div class="clearfix"></div>
+
+
+
+        </div>
+
+        <p class="text-center">
+            <a href="#">See All Foods</a>
+        </p>
+    </section>
+    <!-- fOOD Menu Section Ends Here -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+
+                    </table>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Order now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- social Section Starts Here -->
+    <section class="footer">
+        <section class="social">
+            <div class="container text-center">
+                <ul>
+                    <li>
+                        <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png" /></a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- social Section Ends Here -->
+
+        <!-- footer Section Starts Here -->
+        <div class="container text-center">
+            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+        </div>
+    </section>
+    <!-- footer Section Ends Here -->
+    <script>
+        console.log("<%= admin %>")
+        if ("<%= loggedin %>" == 'yes') {
+
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('logout').style.display = 'inline';
+        }
+        else {
+            document.getElementById('login').style.display = 'inline';
+            document.getElementById('register').style.display = 'inline';
+            document.getElementById('logout').style.display = 'none';
+        }
+        if ("<%= admin %>" == 'yes') {
+            document.getElementById('admin').style.display = 'inline'
+        }
+        else {
+            document.getElementById('admin').style.display = 'none'
+        }
+
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="cart.js"></script>
+
+
+</body>
+
+</html>
